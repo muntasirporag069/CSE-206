@@ -1,0 +1,214 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+// class Person
+// {
+//     string id;
+// protected:
+//     string name, contactNum;
+// public:
+//     Person (string name,string id,string contactNum)
+//     {
+//         this->name = name;
+//         this->id = id;
+//         this->contactNum = contactNum;
+//     }
+//     void display()
+//     {
+//         cout << "Name: " << name << "  \nID: " << id << "  \nContact Number: " << contactNum << endl;
+//     }
+//     string getid()// for formal cout.. as we used Person::display(); we dont need it anymore
+//     {
+//         return id;
+//     }
+// };
+// class Officer: public Person
+// {
+// protected :
+//     int monthlySalary, bonusSlaray;
+//     double officePhone;
+// public:
+//     Officer(int ms,int bs,double op,string name,string id,string cn) :  Person(name,id, cn)
+//     {
+//         monthlySalary = ms;
+//         bonusSlaray = bs;
+//         officePhone = op;
+//     }
+//     void display()
+//     {
+//         Person::display();//or, //cout << "Name: " << name << "  \nID: " << getid() << "  \nContact Number: " << contactNum;
+//         cout << "Monthly salary: " << monthlySalary << "  ,\nBonus salary:" << bonusSlaray << " ,\nOffice phone: " << officePhone << endl;
+//     }
+// };
+
+// int main()
+// {
+//     Person p1("Ahsan", "5011", "xxxxx");
+//     p1.display();
+//     cout << endl
+//          << endl;
+//     Officer o1(20, 30, 8801909226148, "sadiq", "xx64", "yyyy");
+//     cout.precision(15);//try without precision
+//     o1.display(); 
+
+//     return 0;
+// }
+
+
+class Person
+{
+    string id;
+protected:
+    string email;
+public:
+    string name;
+    Person(string name,string id,string email)
+    {
+        this->name = name;
+        this->id = id;
+        this->email = email;
+    }
+    void display()
+    {
+        cout << "\tPerson info:" << endl;
+        cout << "Name :" << name << "\nID: " << id
+             << "\nEmail: " << email << endl;
+    }
+};
+
+
+
+class Employee: public Person
+{
+    double basicSalary;
+protected:
+    double bonous;
+public:
+    Employee (string name,string id,string email,double bs,double bn): Person(name,id,email)
+    {
+        basicSalary = bs;
+        bonous = bn;
+    }
+    double getSalary()
+    {
+        return basicSalary + bonous;
+    }
+    void display()
+    {
+        Person::display();
+        cout << "\tEmployee info:\n";
+        cout << "Basic Salary: " << basicSalary << " \nBonous :" << bonous << endl;
+    }
+};
+
+
+
+
+class Student: protected Person
+{
+    double gpa;
+protected:
+    double fee;
+    void display()
+    {
+        Person::display();
+        cout << "\tStudent info:\n";
+        cout << "GPA: " << gpa << " ,\nFee: " << fee << endl;
+    }
+public:
+    Student(string name,string id,string email,double gpa,double fee): Person(name,id,email)
+    {
+        this->gpa = gpa;
+        this->fee = fee;
+    }
+    double getFee()
+    {
+        return fee;
+    }
+    void protected_dispaly()
+    {
+        display();
+    }
+};
+
+
+
+class Staff_Officers: public Student,public Employee
+{
+protected:
+    string designation;
+    void displaySt()
+    {
+        Student::display();
+    }
+public:
+    Staff_Officers(string name,string id,string email,string designation,double bs,double bn,double gpa,double fee):Student(name,id,email,gpa,fee),Employee (name,id,email, bs, bn)
+    {
+        this->designation = designation;
+    }
+    double getSal()
+    {
+        return getSalary() - fee;
+    }
+    void protected_display_std_from_employ()
+    {
+        displaySt();
+    }
+    void  displayEmployee()
+    {
+        Employee::display();
+    }
+};
+
+
+class PG_Student: private Student
+{
+    double thesis_marks;
+    void display()
+    {
+        Student::display();
+
+        cout << "\tPG_student info\n";
+        cout << "thesis marks : " << thesis_marks << endl;
+    }
+public:
+    PG_Student(string name,string id,string email,double gpa,double fee,double tm):Student(name,id,email,gpa,fee)
+    {
+        thesis_marks = tm;
+    }
+    void private_display_pgst()
+    {
+        display();
+    }
+
+};
+
+int main()
+{
+    Person p1("sss", "40404", "ss@.cm");
+    p1.display();
+    Employee e1("ddd", "555", "dd@.cm", 5.66, 8.88);
+    e1.display();
+    cout << endl
+         << endl
+         << endl;
+
+    Student s1("ddd", "555", "dd@.cm", 5.66,888.99 );
+    s1.protected_dispaly();
+    cout << endl
+         << endl
+         << endl;
+
+    Staff_Officers so1("ddd", "555", "dd@.cm", "mrakhaoa", 5.66, 8.88, 3.99, 50000.84);
+    so1.protected_display_std_from_employ();
+    so1.displayEmployee();
+    cout << endl
+         << endl
+         << endl;
+
+    PG_Student pg1("ddd", "555", "dd@.cm", 5.66, 888.99, 90.1);
+    pg1.private_display_pgst();
+
+    return 0;
+}
