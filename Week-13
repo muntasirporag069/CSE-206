@@ -1,0 +1,245 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//****   1    ***
+// class point
+// {
+// public: 
+//     int x, y;
+//     point(int x,int y)
+//     {
+//         this->x = x, this->y = y;
+//     }
+//     void display()
+//     {
+//         cout << "from point class:" << endl;
+//         cout << "x= " << x << " ,y= " << y << endl;
+//     }
+// };
+// double operator-(point p1,point p2)
+// {
+//     return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
+// }
+// int  main()
+// {
+//     point p1(3, 4), p2(1,2);
+//     double distance = p1 - p2;
+//     cout << distance << endl;
+//     return 0;
+// }
+
+
+
+// //***  2  *****
+// class point
+// {
+//     int x, y;
+// public:
+//     point(int x, int y)
+//     {
+//         this->x = x, this->y = y;
+//     }
+//     void display()
+//     {
+//         cout << "from point class:" << endl;
+//         cout << "x= " << x << " ,y= " << y << endl;
+//     }
+//     friend double operator-(point , point );//  ************* FRIEND
+// };
+// double operator-(point p1, point p2)
+// {
+//     return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
+// }
+// int main()
+// {
+//     point p1(3, 4), p2(1, 2);
+//     double distance = p1 - p2;
+//     cout << distance << endl;
+//     return 0;
+// }
+
+
+
+
+
+
+// //*** 3 ***
+// class point
+// {
+//     int x, y;
+
+// public:
+//     point(int x, int y)
+//     {
+//         this->x = x, this->y = y;
+//     }
+//     void display()
+//     {
+//         cout << "from point class:" << endl;
+//         cout << "x= " << x << " ,y= " << y << endl;
+//     }
+//     friend bool operator>(point, point);   
+//     friend int coordinate(point);          
+// };
+// int coordinate(point p)
+// {
+//     if (p.x > 0 && p.y > 0)
+//         return 1;
+//     if (p.x < 0 && p.y > 0)
+//         return 2;
+//     if (p.x < 0 && p.y < 0)
+//         return 3;
+//     return 4;
+// }
+// bool operator>(point p1, point p2)
+// {
+//     int c1 = coordinate(p1), c2 = coordinate(p2);
+//     if (c1 < c2)
+//         return true;
+//     if (c1 == c2)
+//     {
+//         if (p1.x > p2.x)
+//             return true;
+//         else
+//             return false;
+//     }
+//     else
+//         return false;
+// }
+// int main()
+// {
+//     point p1(3, 4), p2(10, 2);
+//     if(p1>p2)
+//         cout << "p1 is greater." << endl;
+//     else
+//         cout << "p2 is greater." << endl;
+//     return 0;
+// }
+
+
+
+
+
+// //***   4  ***
+// class point
+// {
+//     int x, y;
+
+// public:
+//     point(int x, int y)
+//     {
+//         this->x = x, this->y = y;
+//     }
+//     void display()
+//     {
+//         cout << "from point class:" << endl;
+//         cout << "x= " << x << " ,y= " << y << endl;
+//     }
+//     friend bool operator<=(int, point);
+// };
+// bool operator<=(int x,point p1)
+// {
+//     if(p1.x>=x && p1.y>=x)
+//         return true; 
+//     else
+//         return false;
+// }
+// int main()
+// {
+//     point p1(3, 4);
+//     if (2<=p1)
+//         cout << "p1 is greater or equal to (2,2)." << endl;
+//     else
+//         cout << "(2,2) is greater." << endl;
+//     return 0;
+// }
+
+
+
+
+
+
+// // ****   5   *****
+// class point
+// {
+//     int x, y;
+
+// public:
+//     point(int x, int y)
+//     {
+//         this->x = x, this->y = y;
+//     }
+//     void display()
+//     {
+//         cout << "from point class:" << endl;
+//         cout << "x= " << x << " ,y= " << y << endl;
+//     }
+//     void operator*=(int a)
+//     {
+//         this->x = a*this->x;
+//         this->y = a*this->y;
+//     }
+//     // friend void operator*=(point& , int );// FOR NON MEMBER
+// };
+
+// //****    +=,*=,/=,-= these are complex operator .we nees to   PASS REFERENCE for complex operator while writing a non member
+// //non memeber  
+// // void operator*=(point &p,int a)
+// // {
+// //     p.x = a * p.x;
+// //     p.y = a * p.y;
+// // }
+// int main()
+// {
+//     point p1(3, 4);
+//     p1 *= -1;
+//     p1.display();
+//     return 0;
+// }
+
+  
+
+
+
+class student
+{
+    char *name;
+    int len, roll;
+
+public:
+    student(char *p,int rol,int ln)
+    {
+        roll = rol;
+        len = ln;
+        name = new char[len];
+        for (int i = 0; i < len; i++)
+        {
+            name[i] = p[i];
+        }
+        
+    }
+    void display()
+    {
+        cout << "from student class:" << endl;
+        cout << "name : " << name << "  ,roll: " << roll  << endl;
+    }
+    friend void operator++(student& ,int );
+    ~student()
+    {
+    }
+};
+
+void operator++(student & s, int z)
+{
+    for (int i = 0; i < strlen(s.name); i++)// **** strlen because we used char pointer for name 
+        ++s.name[i];
+}
+
+int main()
+{
+    student s1("CPP", 3, 64);
+    // s1++ doesnt work if we want to do that we have use a dummy value as parameter..  //void operator++(student & s, int z) // int z -> dummy value
+    s1++;// ++s1 will work after removing dummy value
+    s1.display();
+    return 0;
+}
