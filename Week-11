@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Person
+{
+    string contact;
+protected:
+    string designation;
+public:
+    string name, id;
+    Person(string name,string id,string designation,string contact)
+    {
+        this->name = name;
+        this->id = id;
+        this->designation = designation;
+        this->contact = contact;
+    }
+    virtual int getSalary() = 0;
+};
+
+
+class Employee: public Person
+{
+    int basic_sal;
+public:
+    int bonus;
+    Employee(string name,string id,string designation,string contact,int basic,int bns): Person(name,id,designation,contact)
+    {
+        basic_sal = basic;
+        bonus = bns;
+    }
+    virtual int getSalary()
+    {
+        return basic_sal + bonus;
+    }
+};
+class Operator: public Employee
+{
+    int ot_rate, ot_hour;
+public:
+    Operator(string name,string id,string designation,string contact,int basic,int bns,int ot_rate,int ot_hour):Employee(name,id,designation,contact,basic,bns)
+    {
+        this->ot_rate = ot_rate;
+        this->ot_hour = ot_hour;
+    }
+    virtual int getSalary()
+    {
+        return Employee::getSalary() + ot_hour * ot_rate;
+    }
+};
+
+class Machine
+{
+    string name, id;
+protected:
+    string model;
+public:
+    Machine(string name,string id,string model)
+    {
+        this->name = name;
+        this->id = id;
+        this->model = model;
+    }
+    string company;
+    virtual void power_consumption() = 0;
+    virtual void operated_by() = 0;
+
+    string getid()
+    {
+        return id;
+    }
+};
+
+class ElectricMachine: public Machine
+{
+protected:
+    int power_rate, hour_active;
+public:
+    ElectricMachine(string name,string id,string model,int power_rate, int hour_active ): Machine(name,id,model)
+    {
+        this->power_rate = power_rate;
+        this->hour_active = hour_active;
+    }
+    void power_consumption(Machine *m)
+    {
+        cout << "Machine ID: " << m->getid() << "  had a power consumption of  " << power_rate * hour_active << endl;
+    }
+};
+class ProductMachine: public ElectricMachine,public Operator
+{
+public:
+    void operated_by()
+    {
+        cout << "Machine ID: " << Machine::getid() << "  is operated by " << Person::name << "  having ID: " << Person::id << endl;
+    }
+};
+
+void printSalary(Person *p)
+{
+    cout << "Salaray of " << p->name << " ,id:" << p->id << "   is " << p->getSalary() << endl;
+}
+int main()
+{
+    Operator o1("adssd", "2121xxx", "oprpor", "01909xxxxxx", 20000, 5000, 10, 20);
+
+    printSalary(&o1);
+
+    return 0;
+}
