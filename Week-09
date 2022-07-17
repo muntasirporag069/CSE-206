@@ -1,0 +1,127 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+
+
+//************* ryhan sir // *********inheritance
+// class student
+// {
+//     int theory ;
+//     int sessional;
+// public:
+//     void setMarks(int x,int y)
+//     {
+//         theory = x;
+//         sessional = y;
+//     }
+//     int getTheory()
+//     {
+//         return theory;
+//     }
+//     int getSessional()
+//     {
+//         return sessional;
+//     }
+//     int getTotalMark()
+//     {
+//         return theory + sessional;
+//     }
+// };
+// class L4student: public student
+// {
+//     int thesis;//private
+// public:
+//     void setThesis(int x)
+//     {
+//         thesis = x;
+//     }
+//     int getThesis()
+//     {
+//         return thesis;
+//     }
+//     int getTotalMark()// overwritten the function of student class
+//     {
+//         return getTheory() + getSessional() + thesis;
+//         //return getTotalMark() + thesis; //  wont work
+//     }
+// };
+// int main()
+// {
+//     L4student o1;
+//     o1.setMarks(50, 80);
+//     o1.setThesis(100);
+//     cout << o1.getTheory() << "  " << o1.getSessional() << "  " << o1.getThesis() << "  " << o1.getTotalMark();
+
+//     return 0;
+// }
+
+
+
+class student
+{
+    int theory ;
+    int sessional;
+public:
+    void setMarks(int x,int y)
+    {
+        theory = x;
+        sessional = y;
+    }
+    int getTheory()
+    {
+        return theory;
+    }
+    int getSessional()
+    {
+        return sessional;
+    }
+    int getTotalMark()
+    {
+        return theory + sessional;
+    }
+};
+class L4student: private student //##########################  private  
+{
+    int thesis;//private
+public:
+    void ssettMarks(int x,int y)
+    {
+        if(x>0 && x<=100 && y>0 && y<=100)//we can do this extra verification because of private command while using inheritance
+            setMarks(x, y);
+        else
+            cout << "invalid input" << endl;
+    }
+    int ggettTheory()
+    {
+        return getTheory();
+    }
+    int ggettSessional()
+    {
+        return getSessional();
+    }
+    void setThesis(int x)
+    {
+        thesis = x;
+    }
+    int getThesis()
+    {
+        return thesis;
+    }
+    int getTotalMark()// overwritten the function of student class
+    {
+        return getTheory() + getSessional() + thesis;
+        //return getTotalMark() + thesis; //  wont work
+    }
+};
+int main()
+{
+    L4student o1;
+    o1.ssettMarks(50, 80);
+    o1.setThesis(100);
+    cout << o1.ggettTheory() << "  " << o1.ggettSessional() << "  " << o1.getThesis() << "  " << o1.getTotalMark();
+
+    return 0;
+}
+// sadiq
