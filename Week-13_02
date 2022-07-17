@@ -1,0 +1,184 @@
+///Function Overloading
+#include<bits/stdc++.h>
+using namespace std;
+/*class student
+{
+public:
+    string name;
+    int roll;
+    float marks;
+    student(string name, int roll,float marks)
+    {
+        this->name=name;
+        this->roll=roll;
+        this->marks=marks;
+    }
+    void display()
+    {
+        cout<<"Name: "<<name<<endl<<"Roll: "<<roll<<endl<<"Marks: "<<marks<<endl;
+    }
+};*/
+///while points are public
+/*class point
+{
+public:
+    int p1,p2;
+    point()
+    {
+
+    }
+    point(int a,int b)
+    {
+        p1=a;
+        p2=b;
+    }
+    void print()
+  {
+       cout<<"Point #1: "<<p1<<endl<<"Point #2: "<<p2<<endl;
+    }
+};
+
+   double operator-(point X,point Y)
+   {
+       double new_p1=X.p1-Y.p1;
+       double new_p2=X.p2-Y.p2;
+       double dis=sqrt((new_p1*new_p1)+(new_p2*new_p2));
+       return dis;
+   }
+
+int main()
+{
+    point p1(4,3),p2(4,2);
+    double distance=p1-p2;
+    cout<<distance<<endl;
+}*/
+///while points are public
+/*class point
+{
+    int p1,p2;
+public:
+
+    point()
+    {
+
+    }
+    point(int a,int b)
+    {
+        p1=a;
+        p2=b;
+    }
+    void print()
+  {
+       cout<<"Point #1: "<<p1<<endl<<"Point #2: "<<p2<<endl;
+    }
+    friend double operator-(point X,point Y);
+};
+
+   double operator-(point X,point Y)
+   {
+       double new_p1=X.p1-Y.p1;
+       double new_p2=X.p2-Y.p2;
+       double dis=sqrt((new_p1*new_p1)+(new_p2*new_p2));
+       return dis;
+   }
+
+int main()
+{
+    point p1(4,3),p2(4,2);
+    double distance=p1-p2;
+    cout<<distance<<endl;
+}*/
+///while as member function
+class point
+{
+
+    int p1,p2;
+public:
+
+    point()
+    {
+
+    }
+    point(int a,int b)
+    {
+        p1=a;
+        p2=b;
+    }
+    void print()
+  {
+       cout<<"X-axis of point: "<<p1<<endl<<"Y-axis of #1: "<<p2<<endl;
+    }
+   /* double operator-(point Y)
+   {
+       double new_p1=this->p1-Y.p1;
+       double new_p2=this->p2-Y.p2;
+       double dis=sqrt((new_p1*new_p1)+(new_p2*new_p2));
+       return dis;
+   }*/
+   friend void operator*=(point &X,int a);
+  /* point operator*= (int a)///if nonmember function then int operator*=(point &t,int a)
+   {
+       this->p1=this->p1*a;
+       this->p2=this->p2*a;
+       return *this;
+   }*/
+   //friend int quad(point p);
+  // friend bool operator > (point X,point Y);
+ //  friend bool operator <= (int x,point Y);
+};
+///operating overloading for *= while nonmember
+void operator*=(point &X,int a)
+{
+    X.p1=X.p1*a;
+    X.p2=X.p2*a;
+}
+/*
+int quad(point p)
+{
+    if(p.p1>=0&&p.p2>=0)
+        return 1;
+    else if(p.p1<0 && p.p2>0)
+        return 2;
+    else if(p.p1<0 && p.p2<0)
+        return 3;
+    else if(p.p1>0 && p.p2<0)
+        return 4;
+}
+bool operator > (point X,point Y)
+{
+    if(quad(X)<quad(Y))
+        return true;
+
+    else if(quad(X)==quad(Y))
+    {
+        if(X.p1>X.p2)
+            return true;
+        else
+            return false;
+    }
+    else return false;
+}
+
+bool operator <= (int x,point Y)
+{
+    if(Y.p1>=x && Y.p2>=x )
+        return true;
+    else return false;
+}*/
+int main()
+{
+   point p1(-4,-3),p2(4,-2);
+    /*double distance=p1-p2;
+    cout<<distance<<endl;
+    if(p1>p2)
+        cout<<"P1 is greater"<<endl;
+    else
+        cout<<"P2 is greater"<<endl;
+    //return 0;
+    if(2<=p1)
+        cout<<"P1 is greater than or equal to (2,2)"<<endl;
+    else
+        cout<<"Point(2,2) is greater than or equal to P1"<<endl;*/
+    p1*= -10;
+    p1.print();
+}
